@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "YOLOv8 Web App",
+      "runtimeExecutable": "/Users/owaisali/.pyenv/versions/3.14.1/bin/python",
+      "runtimeArgs": ["/Users/owaisali/Desktop/Projects/ObjDetection_1/app.py"],
+      "port": 5000,
+      "autoPort": true
+    }
+  ]
+}
