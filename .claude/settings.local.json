@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(python detect.py your_video.mp4)",
+      "WebFetch(domain:pixabay.com)",
+      "WebSearch",
+      "WebFetch(domain:www.pexels.com)",
+      "WebFetch(domain:www.videezy.com)",
+      "Bash(curl -s \"https://pixabay.com/api/videos/?key=46188613-3a5a6c02b90e08b4ae42aea79&q=restaurant+people+dining&per_page=3\")",
+      "WebFetch(domain:www.videvo.net)",
+      "Bash(curl -sL -o /dev/null -w \"%{http_code}\" \"https://cdn.pixabay.com/video/2024/08/17/226623_large.mp4\" -H \"User-Agent: Mozilla/5.0\")",
+      "Bash(python analyze.py restaurant_video.mp4)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
