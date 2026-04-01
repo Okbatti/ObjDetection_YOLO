@@ -9,9 +9,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Install Python dependencies
+# Install Python dependencies (use headless OpenCV for server)
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt gunicorn opencv-python-headless && \
+RUN pip install --no-cache-dir opencv-python-headless gunicorn && \
+    pip install --no-cache-dir -r requirements.txt && \
     pip uninstall -y opencv-python 2>/dev/null || true
 
 # Copy application code
@@ -21,7 +22,7 @@ COPY . .
 RUN mkdir -p uploads output output/snapshots
 
 # Download YOLO model at build time so it's cached
-RUN python -c "from ultralytics import YOLO; YOLO('yolov8s.pt')"
+RUN python -c "import cv2; print('OpenCV OK'); from ultralytics import YOLO; YOLO('yolov8s.pt'); print('YOLO OK')"
 
 EXPOSE ${PORT:-5000}
 
