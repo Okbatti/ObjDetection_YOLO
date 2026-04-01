@@ -14,7 +14,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
 # Install all other dependencies
-RUN pip install --no-cache-dir ultralytics numpy gunicorn
+RUN pip install --no-cache-dir ultralytics numpy gunicorn flask
 
 # Force replace opencv-python with headless version LAST
 # (ultralytics installs opencv-python as dependency, but we need headless on server)
