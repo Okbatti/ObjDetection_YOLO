@@ -11,11 +11,16 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install CPU-only PyTorch first (saves ~4GB vs CUDA version)
-# Then install remaining dependencies with headless OpenCV
-RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu && \
-    pip install --no-cache-dir opencv-python-headless gunicorn && \
-    pip install --no-cache-dir ultralytics numpy && \
-    python -c "import cv2; import torch; print(f'OpenCV {cv2.__version__} OK, PyTorch {torch.__version__} OK')"
+RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+# Install all other dependencies
+RUN pip install --no-cache-dir ultralytics numpy gunicorn
+
+# Force replace opencv-python with headless version LAST
+# (ultralytics installs opencv-python as dependency, but we need headless on server)
+RUN pip uninstall -y opencv-python && \
+    pip install --no-cache-dir opencv-python-headless && \
+    python -c "import cv2; import torch; from ultralytics import YOLO; print('All imports OK')"
 
 # Copy application code
 COPY . .
